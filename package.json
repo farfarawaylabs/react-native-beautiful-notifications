@@ -1,6 +1,6 @@
 {
   "name": "@farfarawaylabs/react-native-beautiful-notifications",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Highly customizable UI library to show toast style notifications in React Native.",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",

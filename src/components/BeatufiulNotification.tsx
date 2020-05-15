@@ -61,7 +61,7 @@ interface BeautifulNotificationProps extends ViewProperties {
   containerWidth?: number | string;
 
   /** For internal use only. */
-  onDisappear: () => void;
+  onDisappear?: () => void;
 
   /** Additional styles or styles to override default style */
   style?: StyleProp<ViewStyle>;
@@ -85,7 +85,7 @@ const BeautifulNotification: React.FC<BeautifulNotificationProps> = ({
   const [
     shouldDissapearAutoamtically,
     setShouldDissapearAutomatically,
-  ] = useState(disappearAutomaticallyAfter > 0);
+  ] = useState(false);
   const viewRef = useRef(null);
   const notificationWidth = calculateNotificationWidth(containerWidth);
 
@@ -102,21 +102,27 @@ const BeautifulNotification: React.FC<BeautifulNotificationProps> = ({
     let timer: NodeJS.Timeout | null = null;
 
     if (shouldDissapearAutoamtically) {
-      const delay =
-        disappearAutomaticallyAfter === 0 ? 1 : disappearAutomaticallyAfter;
-
       timer = setTimeout(() => {
         const animtableView: any = viewRef.current!;
-
-        const key = animtableView.key;
 
         animtableView
           .animate(exitAnimationType, exitAnimationDuration)
           .then(() => {
-            onDisappear();
+            if (onDisappear) onDisappear();
           });
-      }, delay);
+      }, 1);
+    } else if (disappearAutomaticallyAfter > 0) {
+      timer = setTimeout(() => {
+        const animtableView: any = viewRef.current!;
+
+        animtableView
+          .animate(exitAnimationType, exitAnimationDuration)
+          .then(() => {
+            if (onDisappear) onDisappear();
+          });
+      }, disappearAutomaticallyAfter);
     }
+
     return () => {
       if (timer) {
         clearTimeout(timer);
@@ -127,9 +133,12 @@ const BeautifulNotification: React.FC<BeautifulNotificationProps> = ({
     exitAnimationDuration,
     exitAnimationType,
     shouldDissapearAutoamtically,
+    onDisappear,
   ]);
+
   const onPress = () => {
     setShouldDissapearAutomatically(true);
+    console.log('here');
   };
 
   return (
@@ -149,10 +158,8 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     backgroundColor: '#000',
-    borderRadius: 5,
     padding: 10,
     marginVertical: 5,
-    paddingRight: 10,
   },
 
   touchContainer: {
