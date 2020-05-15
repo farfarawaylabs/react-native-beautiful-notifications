@@ -1,9 +1,11 @@
-import { NativeModules } from 'react-native';
+import Billboard, { NOTIFICATIONS_POSITION } from './components/Billboard';
+import BeautifulNotification from './components/BeatufiulNotification';
 
-type ReactNativeBeautifulNotificationsType = {
-  multiply(a: number, b: number): Promise<number>;
+import { showNotification } from './api/api';
+
+export {
+  Billboard,
+  NOTIFICATIONS_POSITION,
+  BeautifulNotification,
+  showNotification,
 };
-
-const { ReactNativeBeautifulNotifications } = NativeModules;
-
-export default ReactNativeBeautifulNotifications as ReactNativeBeautifulNotificationsType;

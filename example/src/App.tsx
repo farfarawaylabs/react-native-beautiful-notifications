@@ -1,17 +1,21 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import ReactNativeBeautifulNotifications from '@farfarawaylabs/react-native-beautiful-notifications';
+import { StyleSheet, View, Button } from 'react-native';
+import {
+  Billboard,
+  NOTIFICATIONS_POSITION,
+  showNotification,
+} from '@farfarawaylabs/react-native-beautiful-notifications';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    ReactNativeBeautifulNotifications.multiply(3, 7).then(setResult);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Billboard position={NOTIFICATIONS_POSITION.TOP} />
+      <Button
+        title="Add notification"
+        onPress={() => {
+          showNotification({ text: 'message' });
+        }}
+      />
     </View>
   );
 }
