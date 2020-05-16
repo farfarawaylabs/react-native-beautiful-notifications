@@ -9,7 +9,6 @@ import {
   ViewProperties,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import PubSub from 'pubsub-js';
 
 const DEFAULT_NOTIFICATION_WIDTH = Dimensions.get('window').width * 0.9;
 
@@ -138,7 +137,6 @@ const BeautifulNotification: React.FC<BeautifulNotificationProps> = ({
 
   const onPress = () => {
     setShouldDissapearAutomatically(true);
-    console.log('here');
   };
 
   return (

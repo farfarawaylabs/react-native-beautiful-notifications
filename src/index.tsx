@@ -3,6 +3,7 @@ import BeautifulNotification from './components/BeatufiulNotification';
 
 import {
   showNotification,
+  showNotificationWithIcon,
   showRoundedNotification,
   showMaterialStyleTextNotification,
   showErrorNotification,
@@ -20,4 +21,5 @@ export {
   showErrorNotification,
   showWarningNotification,
   showInfoNotification,
+  showNotificationWithIcon,
 };

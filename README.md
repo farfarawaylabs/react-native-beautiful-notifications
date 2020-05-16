@@ -7,6 +7,10 @@ Highly customizable UI library to show animatable and highly customizable toast 
 This library is using the awesome react-native-animatable for all animations, you should install it as well.
 https://github.com/oblador/react-native-animatable
 
+** Please note: ** Starting version 2.0.0 this library is is using the popular react-native-vector-icons to support showing icons inside notifications. If you are using version 2 and up, please follow the installaitions instructions of react-native-vector-icons here: https://github.com/oblador/react-native-vector-icons#installation
+
+If you want to use this library without this dependency, please use any version between 1.0.0 and 2.0.0. You can also checkout the Tag V1.0.0 from this repository.
+
 ```sh
 npm install @farfarawaylabs/react-native-beautiful-notifications
 ```
@@ -18,7 +22,7 @@ You can also download this repository and run the exmaple project using:
 yarn example ios
 yarn example android
 
-<img width="300" height="600" src="https://github.com/nechmads/demo_images/blob/master/fflabs_react_native_beautiful_animations/demo.gif?raw=true">
+<img width="300" height="600" src="https://github.com/nechmads/demo_images/blob/master/fflabs_react_native_beautiful_animations/demo2.gif?raw=true">
 
 ## Architecture and design choices
 
@@ -104,6 +108,38 @@ export default function App() {
             autoDisappearTime: 1500,
             style: { paddingVertical: 30, backgroundColor: '#f5a8a8' },
             textStyle: { color: '#dddddd', fontWeight: 'bold' },
+          });
+        }}
+      />
+    </View>
+  );
+```
+
+### showNotificartionWithIcon
+
+Very similar to showNotification, this method accpet the same props plus props to control the icon itself.
+It allows you to also show an icon on the notification.
+
+```js
+import {
+    Billboard,
+    NOTIFICATIONS_POSITION,
+} from '@farfarawaylabs/react-native-beautiful-notifications';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Billboard position={NOTIFICATIONS_POSITION.TOP} />
+      <Button
+        title="Add Notification With Icon"
+        onPress={() => {
+          showNotificationWithIcon({
+            text: 'This notification has an icon',
+            iconType: 'font-awesome',
+            iconName: 'smile-o',
+            iconColor: '#FFF',
+            iconSize: 36,
+            autoDisappearTime: 2000,
           });
         }}
       />

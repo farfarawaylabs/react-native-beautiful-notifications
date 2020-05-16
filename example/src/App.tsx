@@ -9,6 +9,7 @@ import {
   showErrorNotification,
   showWarningNotification,
   showInfoNotification,
+  showNotificationWithIcon,
 } from '@farfarawaylabs/react-native-beautiful-notifications';
 
 export default function App() {
@@ -28,13 +29,27 @@ export default function App() {
       />
 
       <Button
+        title="Add Notification With Icon"
+        onPress={() => {
+          showNotificationWithIcon({
+            text: 'This notification has an icon',
+            iconType: 'font-awesome',
+            iconName: 'smile-o',
+            iconColor: '#FFF',
+            iconSize: 36,
+            autoDisappearTime: 2000,
+          });
+        }}
+      />
+
+      <Button
         title="Add Material Style Notification"
         onPress={() => {
           showMaterialStyleTextNotification({
             text: 'This is a notification message',
             backgroundColor: '#82c4c3',
             color: '#FFF',
-            autoDisappearTime: 0,
+            autoDisappearTime: 1500,
           });
         }}
       />
@@ -102,6 +117,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
+    marginBottom: 50,
   },
 });

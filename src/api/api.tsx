@@ -6,6 +6,9 @@ import { StyleProp, ViewStyle, TextStyle, ViewProps } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import BeautifulNotification from '../components/BeatufiulNotification';
 import BeautifulNotificationText from '../components/BeatutifulNotificationText';
+import BeautifulNotificationBody, {
+  BeautifulNotififcationBodyProps,
+} from '../components/BeautifulNotificationBody';
 
 const publishNotification = (notification: any) => {
   BillboadDataSource.addNotification(notification);
@@ -89,6 +92,53 @@ export const showNotification = ({
   publishNotification(notification);
 };
 
+export interface IconApiNotificationProps
+  extends NotificationProps,
+    Omit<BeautifulNotififcationBodyProps, 'containerStyle'> {}
+
+export const showNotificationWithIcon = ({
+  iconType,
+  iconName,
+  iconSize,
+  iconColor,
+  iconStyle,
+  textStyle,
+  text,
+  style = {},
+  width = '100%',
+  autoDisappearTime = 3000,
+  entranceAnimationType = 'fadeIn',
+  entranceAnimationDuration = 1000,
+  exitAnimationType = 'fadeOut',
+  exitAnimationDuration = 1000,
+}: IconApiNotificationProps) => {
+  const notification = (
+    <BeautifulNotification
+      containerWidth={width}
+      style={style}
+      entranceAnimationType={entranceAnimationType}
+      entranceAnimationDuration={entranceAnimationDuration}
+      exitAnimationType={exitAnimationType}
+      exitAnimationDuration={exitAnimationDuration}
+      disappearAutomaticallyAfter={autoDisappearTime}
+    >
+      <BeautifulNotificationBody
+        containerStyle={style}
+        iconType={iconType}
+        iconName={iconName}
+        iconSize={iconSize}
+        iconColor={iconColor}
+        iconStyle={iconStyle}
+        textStyle={textStyle}
+      >
+        {text}
+      </BeautifulNotificationBody>
+    </BeautifulNotification>
+  );
+
+  publishNotification(notification);
+};
+
 export interface RoundedNotificationProps {
   /** The text of the notification. */
   text?: string;
@@ -134,7 +184,7 @@ export const showMaterialStyleTextNotification = ({
   });
 };
 
-export interface ErrorNotificationProps extends RoundedNotificationProps {
+export interface ApiNotificationProps extends RoundedNotificationProps {
   /** The type of animation to be used when showing the notification. Default to fadeIn animation.
       See react-native-animatable for possible value */
   entranceAnimationType?: Animatable.Animation;
@@ -159,10 +209,13 @@ export const showErrorNotification = ({
   exitAnimationType = 'bounceOutUp',
   exitAnimationDuration = 1000,
   entranceAnimationDuration = 1000,
-}: ErrorNotificationProps) => {
-  showNotification({
+}: ApiNotificationProps) => {
+  showNotificationWithIcon({
+    iconType: 'font-awesome',
+    iconName: 'exclamation',
+    iconColor: color,
     text,
-    style: [{ backgroundColor: backgroundColor }, styles.materialNotification],
+    style: [{ backgroundColor: backgroundColor }, styles.iconNotification],
     textStyle: { color: color },
     autoDisappearTime,
     entranceAnimationType,
@@ -171,8 +224,6 @@ export const showErrorNotification = ({
     entranceAnimationDuration,
   });
 };
-
-export interface WarneingNotificationProps extends ErrorNotificationProps {}
 
 export const showWarningNotification = ({
   text,
@@ -183,10 +234,13 @@ export const showWarningNotification = ({
   exitAnimationType = 'bounceOutUp',
   exitAnimationDuration = 1000,
   entranceAnimationDuration = 1000,
-}: WarneingNotificationProps) => {
-  showNotification({
+}: ApiNotificationProps) => {
+  showNotificationWithIcon({
+    iconType: 'entypo',
+    iconName: 'warning',
+    iconColor: color,
     text,
-    style: [{ backgroundColor: backgroundColor }, styles.materialNotification],
+    style: [{ backgroundColor: backgroundColor }, styles.iconNotification],
     textStyle: { color: color },
     autoDisappearTime,
     entranceAnimationType,
@@ -195,8 +249,6 @@ export const showWarningNotification = ({
     entranceAnimationDuration,
   });
 };
-
-export interface InfoNotificationProps extends ErrorNotificationProps {}
 
 export const showInfoNotification = ({
   text,
@@ -207,10 +259,13 @@ export const showInfoNotification = ({
   exitAnimationType = 'bounceOut',
   exitAnimationDuration = 1000,
   entranceAnimationDuration = 1000,
-}: WarneingNotificationProps) => {
-  showNotification({
+}: ApiNotificationProps) => {
+  showNotificationWithIcon({
+    iconType: 'entypo',
+    iconName: 'info',
+    iconColor: color,
     text,
-    style: [{ backgroundColor: backgroundColor }, styles.materialNotification],
+    style: [{ backgroundColor: backgroundColor }, styles.iconNotification],
     textStyle: { color: color },
     autoDisappearTime,
     entranceAnimationType,
@@ -236,5 +291,9 @@ const styles = StyleSheet.create({
 
   materialNotification: {
     paddingVertical: 20,
+  },
+
+  iconNotification: {
+    paddingVertical: 10,
   },
 });

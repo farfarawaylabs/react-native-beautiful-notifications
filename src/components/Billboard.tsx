@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  StyleProp,
-  ViewStyle,
-  Text,
-  SafeAreaView,
-} from 'react-native';
+import { StyleSheet, StyleProp, ViewStyle, SafeAreaView } from 'react-native';
 import PubSub from 'pubsub-js';
 import BillboardDataSource from '../datasources/NotificationsDataSource';
 import { Col, Alignment } from '@farfarawaylabs/react-native-layout';
@@ -43,7 +37,7 @@ const Billboard: React.FC<BillboardProps> = ({
     };
   }, []);
 
-  const addNoficiation = (message, data) => {
+  const addNoficiation = () => {
     setLastNotificationTime(new Date());
   };
 
