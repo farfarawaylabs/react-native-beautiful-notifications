@@ -58,6 +58,36 @@ export default function App() {
   );
 ```
 
+### Usage with React Navigation
+
+if you are using React Navigation version 5 and above, there is a weird bug with Android that hides absolute positioned elements above the NavigationContainer. Luckliy there is an easy fix. Simply put your Billboard after the NavigationContainer instead of before.
+
+```js
+import {
+  Billboard,
+  NOTIFICATIONS_POSITION,
+} from '@farfarawaylabs/react-native-beautiful-notifications';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+function App() {
+  return (
+    <View style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+      <Billboard />
+    </View>
+  );
+}
+```
+
+### Customization
+
 You can customize most notifications with the following props (see exmaple project for exmaple code). All the props has some default values so you can decide what to customize and what to leave as is.
 
 - text: The text of the notification. If you pass this prop, the notificationUI one will be ignored
