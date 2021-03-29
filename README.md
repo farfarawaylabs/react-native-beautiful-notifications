@@ -1,5 +1,7 @@
 # @farfarawaylabs/react-native-beautiful-notifications
 
+## This repository and package are depracted. Please use the new version at: https://github.com/farfarawaylabs/react-native-animatable-notifications
+
 Highly customizable UI library to show animatable and highly customizable toast style notifications in React Native.
 
 ## Installation
