@@ -147,7 +147,7 @@ export default function App() {
   );
 ```
 
-### showNotificartionWithIcon
+### showNotificationWithIcon
 
 Very similar to showNotification, this method accpet the same props plus props to control the icon itself.
 It allows you to also show an icon on the notification.
